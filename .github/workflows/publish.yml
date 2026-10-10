@@ -1,0 +1,31 @@
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify tag matches package.json version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG="$(node -p "require('./package.json').version")"
+          [ "$TAG" = "$PKG" ] || { echo "Tag ($TAG) does not match package.json ($PKG)"; exit 1; }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

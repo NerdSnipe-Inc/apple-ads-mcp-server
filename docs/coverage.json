@@ -1,0 +1,1028 @@
+{
+  "generatedBy": "scripts/generate.mjs",
+  "sdk": {
+    "name": "@apple/apple-ads-platform",
+    "version": "1.109.0"
+  },
+  "totals": {
+    "sdkOperations": 99,
+    "metaTools": 3,
+    "tools": 102
+  },
+  "groups": {
+    "accounts": 7,
+    "apps": 3,
+    "eligibility": 3,
+    "brands": 7,
+    "location_groups": 5,
+    "campaigns": 6,
+    "ad_groups": 5,
+    "ads": 5,
+    "creatives": 5,
+    "assets": 4,
+    "keywords": 5,
+    "negative_keywords": 5,
+    "bulk": 4,
+    "geo": 2,
+    "product_pages": 4,
+    "budget_orders": 5,
+    "reports_apps": 5,
+    "reports_brands": 5,
+    "insights": 2,
+    "recommendations": 6,
+    "suggestions": 4,
+    "change_history": 2
+  },
+  "operations": [
+    {
+      "operationId": "adAccountsIdGet",
+      "tool": "apple_ads_get_ad_account",
+      "group": "accounts",
+      "method": "GET",
+      "path": "/v1/ad-accounts/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adAccountsIdPut",
+      "tool": "apple_ads_update_ad_account",
+      "group": "accounts",
+      "method": "PUT",
+      "path": "/v1/ad-accounts/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adAccountsPost",
+      "tool": "apple_ads_create_ad_account",
+      "group": "accounts",
+      "method": "POST",
+      "path": "/v1/ad-accounts",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "none"
+    },
+    {
+      "operationId": "getAdvertiserResources",
+      "tool": "apple_ads_get_advertiser_resources",
+      "group": "accounts",
+      "method": "GET",
+      "path": "/v1/advertiser-resources",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "none"
+    },
+    {
+      "operationId": "getMe",
+      "tool": "apple_ads_get_me",
+      "group": "accounts",
+      "method": "GET",
+      "path": "/v1/me",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "none"
+    },
+    {
+      "operationId": "getUserAcls",
+      "tool": "apple_ads_get_user_acls",
+      "group": "accounts",
+      "method": "GET",
+      "path": "/v1/acls",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "none"
+    },
+    {
+      "operationId": "orgsIdGet",
+      "tool": "apple_ads_get_org",
+      "group": "accounts",
+      "method": "GET",
+      "path": "/v1/orgs/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "none"
+    },
+    {
+      "operationId": "getAppDetailsByAdamId",
+      "tool": "apple_ads_get_app_details",
+      "group": "apps",
+      "method": "GET",
+      "path": "/v1/apps/{adamId}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "querySupportedAppLanguages",
+      "tool": "apple_ads_query_supported_app_languages",
+      "group": "apps",
+      "method": "POST",
+      "path": "/v1/metadata/apps/supported-languages/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "searchApps",
+      "tool": "apple_ads_search_apps",
+      "group": "apps",
+      "method": "GET",
+      "path": "/v1/search/apps",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "eligibilitiesAppsQueryPost",
+      "tool": "apple_ads_check_app_eligibility",
+      "group": "eligibility",
+      "method": "POST",
+      "path": "/v1/eligibilities/apps/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "rejectionReasonsAppsQueryPost",
+      "tool": "apple_ads_query_app_rejection_reasons",
+      "group": "eligibility",
+      "method": "POST",
+      "path": "/v1/rejection-reasons/apps/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "rejectionReasonsAppsRejectionReasonIdGet",
+      "tool": "apple_ads_get_app_rejection_reason",
+      "group": "eligibility",
+      "method": "GET",
+      "path": "/v1/rejection-reasons/apps/{rejectionReasonId}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getBrand",
+      "tool": "apple_ads_get_brand",
+      "group": "brands",
+      "method": "GET",
+      "path": "/v1/business-brands/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getCategory",
+      "tool": "apple_ads_get_business_category",
+      "group": "brands",
+      "method": "GET",
+      "path": "/v1/business-categories/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getLocation",
+      "tool": "apple_ads_get_location",
+      "group": "brands",
+      "method": "GET",
+      "path": "/v1/locations/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryBrands",
+      "tool": "apple_ads_query_brands",
+      "group": "brands",
+      "method": "POST",
+      "path": "/v1/business-brands/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryCategories",
+      "tool": "apple_ads_query_business_categories",
+      "group": "brands",
+      "method": "POST",
+      "path": "/v1/business-categories/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryLocations",
+      "tool": "apple_ads_query_locations",
+      "group": "brands",
+      "method": "POST",
+      "path": "/v1/locations/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryRejectionReasonsByBusinessBrand",
+      "tool": "apple_ads_query_brand_rejection_reasons",
+      "group": "brands",
+      "method": "POST",
+      "path": "/v1/rejection-reasons/business-brands/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "createLocationGroup",
+      "tool": "apple_ads_create_location_group",
+      "group": "location_groups",
+      "method": "POST",
+      "path": "/v1/location-groups",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "deleteLocationGroup",
+      "tool": "apple_ads_delete_location_group",
+      "group": "location_groups",
+      "method": "DELETE",
+      "path": "/v1/location-groups/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getLocationGroup",
+      "tool": "apple_ads_get_location_group",
+      "group": "location_groups",
+      "method": "GET",
+      "path": "/v1/location-groups/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryLocationGroups",
+      "tool": "apple_ads_query_location_groups",
+      "group": "location_groups",
+      "method": "POST",
+      "path": "/v1/location-groups/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "updateLocationGroup",
+      "tool": "apple_ads_update_location_group",
+      "group": "location_groups",
+      "method": "PUT",
+      "path": "/v1/location-groups/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "campaignsIdDelete",
+      "tool": "apple_ads_delete_campaign",
+      "group": "campaigns",
+      "method": "DELETE",
+      "path": "/v1/campaigns/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "campaignsIdGet",
+      "tool": "apple_ads_get_campaign",
+      "group": "campaigns",
+      "method": "GET",
+      "path": "/v1/campaigns/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "campaignsIdLegacyAppLimitedStatusReasonDetailsGet",
+      "tool": "apple_ads_get_campaign_legacy_limited_status_details",
+      "group": "campaigns",
+      "method": "GET",
+      "path": "/v1/campaigns/{id}/legacy-app-limited-status-reason-details",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "campaignsIdPut",
+      "tool": "apple_ads_update_campaign",
+      "group": "campaigns",
+      "method": "PUT",
+      "path": "/v1/campaigns/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "campaignsPost",
+      "tool": "apple_ads_create_campaign",
+      "group": "campaigns",
+      "method": "POST",
+      "path": "/v1/campaigns",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "campaignsQueryPost",
+      "tool": "apple_ads_query_campaigns",
+      "group": "campaigns",
+      "method": "POST",
+      "path": "/v1/campaigns/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adgroupsIdDelete",
+      "tool": "apple_ads_delete_ad_group",
+      "group": "ad_groups",
+      "method": "DELETE",
+      "path": "/v1/adgroups/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adgroupsIdGet",
+      "tool": "apple_ads_get_ad_group",
+      "group": "ad_groups",
+      "method": "GET",
+      "path": "/v1/adgroups/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adgroupsIdPut",
+      "tool": "apple_ads_update_ad_group",
+      "group": "ad_groups",
+      "method": "PUT",
+      "path": "/v1/adgroups/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adgroupsPost",
+      "tool": "apple_ads_create_ad_group",
+      "group": "ad_groups",
+      "method": "POST",
+      "path": "/v1/adgroups",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adgroupsQueryPost",
+      "tool": "apple_ads_query_ad_groups",
+      "group": "ad_groups",
+      "method": "POST",
+      "path": "/v1/adgroups/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adsIdDelete",
+      "tool": "apple_ads_delete_ad",
+      "group": "ads",
+      "method": "DELETE",
+      "path": "/v1/ads/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adsIdGet",
+      "tool": "apple_ads_get_ad",
+      "group": "ads",
+      "method": "GET",
+      "path": "/v1/ads/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adsIdPut",
+      "tool": "apple_ads_update_ad",
+      "group": "ads",
+      "method": "PUT",
+      "path": "/v1/ads/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adsPost",
+      "tool": "apple_ads_create_ad",
+      "group": "ads",
+      "method": "POST",
+      "path": "/v1/ads",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "adsQueryPost",
+      "tool": "apple_ads_query_ads",
+      "group": "ads",
+      "method": "POST",
+      "path": "/v1/ads/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "creativesIdDelete",
+      "tool": "apple_ads_delete_creative",
+      "group": "creatives",
+      "method": "DELETE",
+      "path": "/v1/creatives/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "creativesIdGet",
+      "tool": "apple_ads_get_creative",
+      "group": "creatives",
+      "method": "GET",
+      "path": "/v1/creatives/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "creativesIdPut",
+      "tool": "apple_ads_update_creative",
+      "group": "creatives",
+      "method": "PUT",
+      "path": "/v1/creatives/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "creativesPost",
+      "tool": "apple_ads_create_creative",
+      "group": "creatives",
+      "method": "POST",
+      "path": "/v1/creatives",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "creativesQueryPost",
+      "tool": "apple_ads_query_creatives",
+      "group": "creatives",
+      "method": "POST",
+      "path": "/v1/creatives/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "deleteAsset",
+      "tool": "apple_ads_delete_asset",
+      "group": "assets",
+      "method": "DELETE",
+      "path": "/v1/assets/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getAsset",
+      "tool": "apple_ads_get_asset",
+      "group": "assets",
+      "method": "GET",
+      "path": "/v1/assets/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryAssets",
+      "tool": "apple_ads_query_assets",
+      "group": "assets",
+      "method": "POST",
+      "path": "/v1/assets/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "uploadAsset",
+      "tool": "apple_ads_upload_asset",
+      "group": "assets",
+      "method": "POST",
+      "path": "/v1/assets/upload",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsIdDelete",
+      "tool": "apple_ads_delete_keyword",
+      "group": "keywords",
+      "method": "DELETE",
+      "path": "/v1/keywords/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsIdGet",
+      "tool": "apple_ads_get_keyword",
+      "group": "keywords",
+      "method": "GET",
+      "path": "/v1/keywords/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsIdPut",
+      "tool": "apple_ads_update_keyword",
+      "group": "keywords",
+      "method": "PUT",
+      "path": "/v1/keywords/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsPost",
+      "tool": "apple_ads_create_keyword",
+      "group": "keywords",
+      "method": "POST",
+      "path": "/v1/keywords",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsQueryPost",
+      "tool": "apple_ads_query_keywords",
+      "group": "keywords",
+      "method": "POST",
+      "path": "/v1/keywords/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsIdDelete",
+      "tool": "apple_ads_delete_negative_keyword",
+      "group": "negative_keywords",
+      "method": "DELETE",
+      "path": "/v1/negative-keywords/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsIdGet",
+      "tool": "apple_ads_get_negative_keyword",
+      "group": "negative_keywords",
+      "method": "GET",
+      "path": "/v1/negative-keywords/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsIdPut",
+      "tool": "apple_ads_update_negative_keyword",
+      "group": "negative_keywords",
+      "method": "PUT",
+      "path": "/v1/negative-keywords/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsPost",
+      "tool": "apple_ads_create_negative_keyword",
+      "group": "negative_keywords",
+      "method": "POST",
+      "path": "/v1/negative-keywords",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsQueryPost",
+      "tool": "apple_ads_query_negative_keywords",
+      "group": "negative_keywords",
+      "method": "POST",
+      "path": "/v1/negative-keywords/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsBulkCreatePost",
+      "tool": "apple_ads_bulk_create_keywords",
+      "group": "bulk",
+      "method": "POST",
+      "path": "/v1/keywords/bulk-create",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "keywordsBulkUpdatePost",
+      "tool": "apple_ads_bulk_update_keywords",
+      "group": "bulk",
+      "method": "POST",
+      "path": "/v1/keywords/bulk-update",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsBulkCreatePost",
+      "tool": "apple_ads_bulk_create_negative_keywords",
+      "group": "bulk",
+      "method": "POST",
+      "path": "/v1/negative-keywords/bulk-create",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "negativeKeywordsBulkUpdatePost",
+      "tool": "apple_ads_bulk_update_negative_keywords",
+      "group": "bulk",
+      "method": "POST",
+      "path": "/v1/negative-keywords/bulk-update",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getGeosByIds",
+      "tool": "apple_ads_get_geos_by_ids",
+      "group": "geo",
+      "method": "POST",
+      "path": "/v1/search/geo",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "searchGeos",
+      "tool": "apple_ads_search_geos",
+      "group": "geo",
+      "method": "GET",
+      "path": "/v1/search/geo",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getProductPageById",
+      "tool": "apple_ads_get_product_page",
+      "group": "product_pages",
+      "method": "GET",
+      "path": "/v1/product-pages/{productPageId}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryAppLocaleDetails",
+      "tool": "apple_ads_query_app_locale_details",
+      "group": "product_pages",
+      "method": "POST",
+      "path": "/v1/apps/{adamId}/locale-details/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryProductPageLocaleDetails",
+      "tool": "apple_ads_query_product_page_locale_details",
+      "group": "product_pages",
+      "method": "POST",
+      "path": "/v1/product-pages/locale-details/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryProductPages",
+      "tool": "apple_ads_query_product_pages",
+      "group": "product_pages",
+      "method": "POST",
+      "path": "/v1/product-pages/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "sharedBudgetsIdDelete",
+      "tool": "apple_ads_delete_budget_order",
+      "group": "budget_orders",
+      "method": "DELETE",
+      "path": "/v1/shared-budgets/{id}",
+      "kind": "delete",
+      "readOnly": false,
+      "scope": "none"
+    },
+    {
+      "operationId": "sharedBudgetsIdGet",
+      "tool": "apple_ads_get_budget_order",
+      "group": "budget_orders",
+      "method": "GET",
+      "path": "/v1/shared-budgets/{id}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "optional"
+    },
+    {
+      "operationId": "sharedBudgetsIdPut",
+      "tool": "apple_ads_update_budget_order",
+      "group": "budget_orders",
+      "method": "PUT",
+      "path": "/v1/shared-budgets/{id}",
+      "kind": "update",
+      "readOnly": false,
+      "scope": "none"
+    },
+    {
+      "operationId": "sharedBudgetsPost",
+      "tool": "apple_ads_create_budget_order",
+      "group": "budget_orders",
+      "method": "POST",
+      "path": "/v1/shared-budgets",
+      "kind": "create",
+      "readOnly": false,
+      "scope": "none"
+    },
+    {
+      "operationId": "sharedBudgetsQueryPost",
+      "tool": "apple_ads_query_budget_orders",
+      "group": "budget_orders",
+      "method": "POST",
+      "path": "/v1/shared-budgets/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "optional"
+    },
+    {
+      "operationId": "appsAdGroupReports",
+      "tool": "apple_ads_report_apps_ad_groups",
+      "group": "reports_apps",
+      "method": "POST",
+      "path": "/v1/reports/apps/adgroups/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "appsAdReports",
+      "tool": "apple_ads_report_apps_ads",
+      "group": "reports_apps",
+      "method": "POST",
+      "path": "/v1/reports/apps/ads/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "appsCampaignReports",
+      "tool": "apple_ads_report_apps_campaigns",
+      "group": "reports_apps",
+      "method": "POST",
+      "path": "/v1/reports/apps/campaigns/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "appsKeywordReports",
+      "tool": "apple_ads_report_apps_keywords",
+      "group": "reports_apps",
+      "method": "POST",
+      "path": "/v1/reports/apps/keywords/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "appsSearchTermReports",
+      "tool": "apple_ads_report_apps_search_terms",
+      "group": "reports_apps",
+      "method": "POST",
+      "path": "/v1/reports/apps/searchterms/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "brandsAdGroupReports",
+      "tool": "apple_ads_report_brands_ad_groups",
+      "group": "reports_brands",
+      "method": "POST",
+      "path": "/v1/reports/business-brands/adgroups/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "brandsAdReports",
+      "tool": "apple_ads_report_brands_ads",
+      "group": "reports_brands",
+      "method": "POST",
+      "path": "/v1/reports/business-brands/ads/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "brandsCampaignReports",
+      "tool": "apple_ads_report_brands_campaigns",
+      "group": "reports_brands",
+      "method": "POST",
+      "path": "/v1/reports/business-brands/campaigns/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "brandsKeywordReports",
+      "tool": "apple_ads_report_brands_keywords",
+      "group": "reports_brands",
+      "method": "POST",
+      "path": "/v1/reports/business-brands/keywords/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "brandsSearchTermReports",
+      "tool": "apple_ads_report_brands_search_terms",
+      "group": "reports_brands",
+      "method": "POST",
+      "path": "/v1/reports/business-brands/searchterms/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "impressionShareQuery",
+      "tool": "apple_ads_query_impression_share",
+      "group": "insights",
+      "method": "POST",
+      "path": "/v1/insights/apps/impression-share/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "searchTermPopularityQuery",
+      "tool": "apple_ads_query_search_term_popularity",
+      "group": "insights",
+      "method": "POST",
+      "path": "/v1/insights/apps/search-term-popularity/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "applyDailyBudgetRecommendations",
+      "tool": "apple_ads_apply_daily_budget_recommendations",
+      "group": "recommendations",
+      "method": "POST",
+      "path": "/v1/recommendations/daily-budgets/apply",
+      "kind": "action",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "applyTargetCpaRecommendations",
+      "tool": "apple_ads_apply_target_cpa_recommendations",
+      "group": "recommendations",
+      "method": "POST",
+      "path": "/v1/recommendations/target-cpas/apply",
+      "kind": "action",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "dismissDailyBudgetRecommendations",
+      "tool": "apple_ads_dismiss_daily_budget_recommendations",
+      "group": "recommendations",
+      "method": "POST",
+      "path": "/v1/recommendations/daily-budgets/dismiss",
+      "kind": "action",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "dismissTargetCpaRecommendations",
+      "tool": "apple_ads_dismiss_target_cpa_recommendations",
+      "group": "recommendations",
+      "method": "POST",
+      "path": "/v1/recommendations/target-cpas/dismiss",
+      "kind": "action",
+      "readOnly": false,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryDailyBudgetRecommendations",
+      "tool": "apple_ads_query_daily_budget_recommendations",
+      "group": "recommendations",
+      "method": "POST",
+      "path": "/v1/recommendations/daily-budgets/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryTargetCpaRecommendations",
+      "tool": "apple_ads_query_target_cpa_recommendations",
+      "group": "recommendations",
+      "method": "POST",
+      "path": "/v1/recommendations/target-cpas/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryCategorySuggestions",
+      "tool": "apple_ads_query_category_suggestions",
+      "group": "suggestions",
+      "method": "POST",
+      "path": "/v1/suggestions/categories/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryKeywordSuggestions",
+      "tool": "apple_ads_query_keyword_suggestions",
+      "group": "suggestions",
+      "method": "POST",
+      "path": "/v1/suggestions/keywords/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryPhraseSuggestions",
+      "tool": "apple_ads_query_phrase_suggestions",
+      "group": "suggestions",
+      "method": "POST",
+      "path": "/v1/suggestions/phrases/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryTargetCpaSuggestion",
+      "tool": "apple_ads_query_target_cpa_suggestion",
+      "group": "suggestions",
+      "method": "POST",
+      "path": "/v1/suggestions/target-cpas/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "getChangeDetails",
+      "tool": "apple_ads_get_change_details",
+      "group": "change_history",
+      "method": "GET",
+      "path": "/v1/change-history/{detailId}",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    },
+    {
+      "operationId": "queryAuditSummary",
+      "tool": "apple_ads_query_change_history",
+      "group": "change_history",
+      "method": "POST",
+      "path": "/v1/change-history/query",
+      "kind": "read",
+      "readOnly": true,
+      "scope": "adAccount"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.key
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.tgz

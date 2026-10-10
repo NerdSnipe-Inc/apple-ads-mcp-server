@@ -1,0 +1,78 @@
+{
+  "name": "@nerdsnipe-inc/apple-ads-mcp-server",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol (MCP) server for the Apple Ads Platform API (v1) - full read/write coverage of every operation in Apple's official Node SDK.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "apple-ads",
+    "apple-search-ads",
+    "app-store-ads",
+    "apple-maps-ads",
+    "advertising",
+    "ai",
+    "claude",
+    "cursor",
+    "automation"
+  ],
+  "homepage": "https://github.com/NerdSnipe-Inc/apple-ads-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/NerdSnipe-Inc/apple-ads-mcp-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NerdSnipe-Inc/apple-ads-mcp-server.git"
+  },
+  "license": "MIT",
+  "author": "NerdSnipe Inc <hello@nerdsnipe.cc>",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "apple-ads-mcp-server": "./bin/apple-ads-mcp-server.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "bin",
+    "docs",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "generate:check": "node scripts/generate.mjs --check",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run generate:check && npm run build && npm test"
+  },
+  "dependencies": {
+    "@apple/apple-ads-platform": "1.109.0",
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.25.0",
+    "zod-to-json-schema": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "tsx": "^4.7.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "overrides": {
+    "axios": "1.20.0"
+  }
+}

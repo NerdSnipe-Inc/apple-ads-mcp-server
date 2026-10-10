@@ -1,0 +1,122 @@
+// GENERATED FILE - DO NOT EDIT.
+// Source: scripts/generate.mjs (group "brands": Apple Maps brands, business categories, brand rejection reasons and locations). Run `npm run generate` to refresh.
+// Tool names, groups and summaries live in scripts/curated.mjs.
+import { z } from "zod";
+import { defineOperation, idParam } from "../tooling.js";
+import { QueryFilterSchema, QueryPaginationSchema, QuerySortSchema } from "../generated/schemas.js";
+
+export const brandsTools = [
+  defineOperation({
+    name: "apple_ads_get_brand",
+    group: "brands",
+    operationId: "getBrand",
+    kind: "read",
+    method: "GET",
+    path: "/v1/business-brands/{id}",
+    scope: "adAccount",
+    annotations: {"title":"Get Brand","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Get one Apple Maps business brand by ID.\n\nRetrieves a single brand by its Business Connect ID\n\nHTTP: GET /v1/business-brands/{id}.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"path","sdk":"id","name":"brandId","type":"string"}],
+    shape: {
+      "brandId": idParam("Business Connect entity identifier"),
+    },
+  }),
+  defineOperation({
+    name: "apple_ads_get_business_category",
+    group: "brands",
+    operationId: "getCategory",
+    kind: "read",
+    method: "GET",
+    path: "/v1/business-categories/{id}",
+    scope: "adAccount",
+    annotations: {"title":"Get Business Category","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Get one Apple Maps business category by ID.\n\nRetrieves a single category by its Business Connect ID\n\nHTTP: GET /v1/business-categories/{id}.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"path","sdk":"id","name":"categoryId","type":"string"}],
+    shape: {
+      "categoryId": idParam("Business Connect entity identifier"),
+    },
+  }),
+  defineOperation({
+    name: "apple_ads_get_location",
+    group: "brands",
+    operationId: "getLocation",
+    kind: "read",
+    method: "GET",
+    path: "/v1/locations/{id}",
+    scope: "adAccount",
+    annotations: {"title":"Get Location","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Get one Apple Maps business location by ID.\n\nRetrieves a single location by its Business Connect ID\n\nHTTP: GET /v1/locations/{id}.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"path","sdk":"id","name":"locationId","type":"string"}],
+    shape: {
+      "locationId": idParam("Business Connect entity identifier"),
+    },
+  }),
+  defineOperation({
+    name: "apple_ads_query_brands",
+    group: "brands",
+    operationId: "queryBrands",
+    kind: "read",
+    method: "POST",
+    path: "/v1/business-brands/query",
+    scope: "adAccount",
+    annotations: {"title":"Query Brands","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Query Apple Maps business brands. Filter by eligibility.status ELIGIBLE to find brands usable in campaigns.\n\nRetrieves a list of brands based on filtering, sorting, and pagination criteria. Using `\\\"fields\\\": [\\\"providerObjectId\\\"]` returns a validation error. Filtering on `id` matches the Business Connect provider object ID.\n\nHTTP: POST /v1/business-brands/query.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.\nPagination: pass pagination.pageSize and pagination.offset (set pagination.fetchTotalCount=true to get totalCount); the response's `pagination` block reports offset, pageSize and totalCount. Fetch the next page by adding pageSize to offset.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"body","sdk":"queryRequest","mode":"flatten","keys":["filters","sorting","pagination"]}],
+    shape: {
+      "filters": z.array(QueryFilterSchema).nullable().optional().describe("Filter conditions, each {field, operator, value, ignoreCase?}. Operators vary by endpoint (EQUALS, NOT_EQUALS, IN, LIKE, STARTS_WITH, CONTAINS, CONTAINS_ANY, CONTAINS_ALL, BETWEEN, GREATER_THAN, LESS_THAN, ...). 'value' may be a scalar or an array (for IN/BETWEEN). Omit to return everything. The tool description lists the supported filter fields."),
+      "sorting": z.array(QuerySortSchema).nullable().optional().describe("Sort order, each {field, order: ASC|DESC}. Default is id ascending."),
+      "pagination": QueryPaginationSchema.optional().describe("Paging controls {offset, pageSize, fetchTotalCount}. Increase offset by pageSize to get the next page."),
+    },
+  }),
+  defineOperation({
+    name: "apple_ads_query_business_categories",
+    group: "brands",
+    operationId: "queryCategories",
+    kind: "read",
+    method: "POST",
+    path: "/v1/business-categories/query",
+    scope: "adAccount",
+    annotations: {"title":"Query Business Categories","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Query Apple Maps business categories.\n\nRetrieves a list of categories based on filtering, sorting, and pagination criteria. Using `\\\"fields\\\": [\\\"providerObjectId\\\"]` returns a validation error.\n\nHTTP: POST /v1/business-categories/query.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.\nPagination: pass pagination.pageSize and pagination.offset (set pagination.fetchTotalCount=true to get totalCount); the response's `pagination` block reports offset, pageSize and totalCount. Fetch the next page by adding pageSize to offset.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"body","sdk":"queryRequest","mode":"flatten","keys":["filters","sorting","pagination"]}],
+    shape: {
+      "filters": z.array(QueryFilterSchema).nullable().optional().describe("Filter conditions, each {field, operator, value, ignoreCase?}. Operators vary by endpoint (EQUALS, NOT_EQUALS, IN, LIKE, STARTS_WITH, CONTAINS, CONTAINS_ANY, CONTAINS_ALL, BETWEEN, GREATER_THAN, LESS_THAN, ...). 'value' may be a scalar or an array (for IN/BETWEEN). Omit to return everything. The tool description lists the supported filter fields."),
+      "sorting": z.array(QuerySortSchema).nullable().optional().describe("Sort order, each {field, order: ASC|DESC}. Default is id ascending."),
+      "pagination": QueryPaginationSchema.optional().describe("Paging controls {offset, pageSize, fetchTotalCount}. Increase offset by pageSize to get the next page."),
+    },
+  }),
+  defineOperation({
+    name: "apple_ads_query_locations",
+    group: "brands",
+    operationId: "queryLocations",
+    kind: "read",
+    method: "POST",
+    path: "/v1/locations/query",
+    scope: "adAccount",
+    annotations: {"title":"Query Locations","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Query the business locations of your Apple Maps brands (read-only; filter by brandId and status OPEN to build location groups).\n\nRetrieves a list of locations based on filtering, sorting, and pagination criteria. Using `\\\"fields\\\": [\\\"providerObjectId\\\"]` returns a validation error.\n\nHTTP: POST /v1/locations/query.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.\nPagination: pass pagination.pageSize and pagination.offset (set pagination.fetchTotalCount=true to get totalCount); the response's `pagination` block reports offset, pageSize and totalCount. Fetch the next page by adding pageSize to offset.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"body","sdk":"queryRequest","mode":"flatten","keys":["filters","sorting","pagination"]}],
+    shape: {
+      "filters": z.array(QueryFilterSchema).nullable().optional().describe("Filter conditions, each {field, operator, value, ignoreCase?}. Operators vary by endpoint (EQUALS, NOT_EQUALS, IN, LIKE, STARTS_WITH, CONTAINS, CONTAINS_ANY, CONTAINS_ALL, BETWEEN, GREATER_THAN, LESS_THAN, ...). 'value' may be a scalar or an array (for IN/BETWEEN). Omit to return everything. The tool description lists the supported filter fields."),
+      "sorting": z.array(QuerySortSchema).nullable().optional().describe("Sort order, each {field, order: ASC|DESC}. Default is id ascending."),
+      "pagination": QueryPaginationSchema.optional().describe("Paging controls {offset, pageSize, fetchTotalCount}. Increase offset by pageSize to get the next page."),
+    },
+  }),
+  defineOperation({
+    name: "apple_ads_query_brand_rejection_reasons",
+    group: "brands",
+    operationId: "queryRejectionReasonsByBusinessBrand",
+    kind: "read",
+    method: "POST",
+    path: "/v1/rejection-reasons/business-brands/query",
+    scope: "adAccount",
+    annotations: {"title":"Query Brand Rejection Reasons","readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":true},
+    description: "Query policy assignments (rejection reasons) for Apple Maps brands and creatives, filtered by the brand's promotedObjectId.\n\nReturns paginated policy assignment records enriched with rejection reason details.\n\nHTTP: POST /v1/rejection-reasons/business-brands/query.\nAd-account scoped: sent with header X-AP-Context: adAccountId=<adAccountId>. adAccountId defaults to APPLE_ADS_AD_ACCOUNT_ID, or to the only ad account your API user can access.\nPagination: pass pagination.pageSize and pagination.offset (set pagination.fetchTotalCount=true to get totalCount); the response's `pagination` block reports offset, pageSize and totalCount. Fetch the next page by adding pageSize to offset.",
+    args: [{"role":"context","sdk":"xApContext"},{"role":"body","sdk":"policyAssignmentQueryRequest","mode":"flatten","keys":["filters","sorting","pagination"]}],
+    shape: {
+      "filters": z.array(QueryFilterSchema).nullable().optional().describe("Filter conditions, each {field, operator, value, ignoreCase?}. Operators vary by endpoint (EQUALS, NOT_EQUALS, IN, LIKE, STARTS_WITH, CONTAINS, CONTAINS_ANY, CONTAINS_ALL, BETWEEN, GREATER_THAN, LESS_THAN, ...). 'value' may be a scalar or an array (for IN/BETWEEN). Omit to return everything. The tool description lists the supported filter fields."),
+      "sorting": z.array(QuerySortSchema).nullable().optional().describe("Sort order, each {field, order: ASC|DESC}. Default is id ascending."),
+      "pagination": QueryPaginationSchema.optional().describe("Paging controls {offset, pageSize, fetchTotalCount}. Increase offset by pageSize to get the next page."),
+    },
+  }),
+];
