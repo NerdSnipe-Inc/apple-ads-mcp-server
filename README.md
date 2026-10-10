@@ -311,6 +311,13 @@ Per-client details are in [Installation](#installation). To verify the package w
 ## Prerequisites
 
 1. An Apple Ads account with API access (Account Settings > API) and Node.js 20+.
+
+   > **A role, not just Account Admin.** The **API** tab (and the public-key field on it) only appears for a user holding **API Account Manager** or **API Account Read Only** — being **Account Admin** alone does not grant it, even though Account Admin's own description mentions "third-party API integration" (that line refers to authorizing an external Service Provider via Sign-in-with-Apple, a *different* feature from the client-credentials flow this server uses).
+   >
+   > **Apple also won't let you grant that role to yourself.** If you're the only user on the account and try to add API Account Manager/Read Only to your own user under Account Settings > User Management, Apple's UI returns: *"Unable to change your role. Ask another Account Admin or Campaign Group Manager for help."* This isn't documented anywhere in Apple's help center — it's enforced by the product, not written down.
+   >
+   > **Workaround for a one-person account:** invite a second user (Account Settings > User Management > Invite User) — a second email address/Apple ID you personally control works fine, it doesn't need to be a different person. Give that invited user **Account Admin** or **Campaign Group Manager**. Sign in as that second user and add **API Account Manager** to your main user. Switch back to your main account — the **API** tab will now show the public-key field.
+
 2. Generate an EC key pair:
 
    ```bash
@@ -492,6 +499,7 @@ Group names: `accounts, apps, eligibility, brands, location_groups, campaigns, a
 | "Missing credentials" error naming variables | Set all of client ID, team ID, key ID and a key path/inline key |
 | 401 after refresh | Wrong clientId/teamId/keyId, or the public key was not uploaded for that key |
 | 403 | The API user lacks a role on that ad account or org |
+| Apple Ads UI: "Unable to change your role. Ask another Account Admin or Campaign Group Manager for help" | You can't grant the API role to your own user. See the callout under [Prerequisites](#prerequisites) — invite a second user you control and have them grant it. |
 | "ad account required" | Pass `adAccountId` or set `APPLE_ADS_AD_ACCOUNT_ID` |
 | `spawn npx ENOENT` or server not found in a desktop app | Use the absolute path from `which npx` (or `which node`) as `command` |
 | Old version keeps running | `npx` caches packages; pin a version (`@nerdsnipe-inc/apple-ads-mcp-server@1.0.1`) or run `npx clear-npx-cache` |
