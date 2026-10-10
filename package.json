@@ -1,6 +1,6 @@
 {
   "name": "@nerdsnipe-inc/apple-ads-mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Model Context Protocol (MCP) server for the Apple Ads Platform API (v1) - full read/write coverage of every operation in Apple's official Node SDK.",
   "keywords": [
     "mcp",
