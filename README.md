@@ -6,6 +6,10 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org)
 [![MCP](https://img.shields.io/badge/protocol-MCP-purple)](https://modelcontextprotocol.io)
 
+[![Sponsor NerdSnipe-Inc](https://img.shields.io/badge/Sponsor-NerdSnipe--Inc-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/NerdSnipe-Inc)
+
+> apple-ads-mcp-server is free and open source. If it saved you time, [sponsoring NerdSnipe Inc](https://github.com/sponsors/NerdSnipe-Inc) pays for the maintenance, bug fixes and new releases that keep it working.
+
 A Model Context Protocol (MCP) server that gives AI assistants (Claude Code, Claude Desktop, Cursor, Windsurf, ...) full access to the **Apple Ads Platform API (v1)**, built on the official [`@apple/apple-ads-platform`](https://www.npmjs.com/package/@apple/apple-ads-platform) SDK.
 
 > This targets the **Apple Ads Platform API** (`https://api.ads.apple.com/v1`), not the older Campaign Management API v5.
@@ -529,6 +533,11 @@ git push --follow-tags
 ```
 
 `GITHUB_TOKEN` is provided automatically for the GitHub Packages step. The workflow refuses to publish if the tag and `package.json` version differ.
+
+## Support the project
+
+- [Sponsor on GitHub](https://github.com/sponsors/NerdSnipe-Inc), from $5/month or a one-time amount
+- [More about what we fund](https://nerdsnipe.cc/sponsor)
 
 ## License
 
