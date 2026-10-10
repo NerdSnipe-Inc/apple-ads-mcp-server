@@ -31,24 +31,27 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+
+      # Trusted publishing (OIDC) needs npm >= 11.5.1; no long-lived NPM_TOKEN is used.
+      - run: npm install -g npm@^11.5.1
 
       - run: npm ci
       - run: npm run generate:check
       - run: npm run build
       - run: npm test
 
+      # Authenticates via GitHub OIDC (id-token: write) against the Trusted Publisher
+      # configured for this package on npmjs.com. Provenance is attached automatically.
       - name: Publish to npmjs.com
-        run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
 
       # ── Publish to GitHub Packages ────────────────────────────────────────────
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@nerdsnipe-inc'
 

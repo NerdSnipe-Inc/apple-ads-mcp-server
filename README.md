@@ -507,14 +507,28 @@ npm run typecheck && npm run build && npm test
 
 ## Releasing
 
-Publishing is automated by [.github/workflows/publish.yml](.github/workflows/publish.yml). Pushing a version tag builds, tests and publishes to npmjs.com (with provenance) and to GitHub Packages.
+Publishing is automated by [.github/workflows/publish.yml](.github/workflows/publish.yml). Pushing a version tag builds, tests and publishes to npmjs.com and to GitHub Packages. The npm publish uses **trusted publishing (OIDC)**: there is no `NPM_TOKEN` secret, and provenance is attached automatically. This matters because npm is [phasing out granular access tokens that bypass 2FA](https://github.blog/changelog/2026-07-08-npm-install-time-security-and-gat-bypass2fa-deprecation/) (they lose direct publishing around January 2027).
+
+**One-time setup (first release):**
+
+1. Publish `1.0.0` once by hand so the package exists on npm. You are prompted for 2FA, and `prepublishOnly` rebuilds and tests first:
+
+   ```bash
+   npm login
+   npm publish --access public
+   ```
+
+2. On npmjs.com open the package > **Settings** > **Trusted publisher** > GitHub Actions, and enter: organization `NerdSnipe-Inc`, repository `apple-ads-mcp-server`, workflow filename `publish.yml`.
+3. Optional hardening: on the same settings page set publishing access to "Require two-factor authentication and disallow tokens".
+
+**Every release after that:**
 
 ```bash
 npm version patch            # or minor / major: bumps package.json and creates the vX.Y.Z tag
 git push --follow-tags
 ```
 
-One-time setup: add an npm automation token as the repository secret `NPM_TOKEN` (Settings > Secrets and variables > Actions). `GITHUB_TOKEN` is provided automatically. The workflow refuses to publish if the tag and `package.json` version differ.
+`GITHUB_TOKEN` is provided automatically for the GitHub Packages step. The workflow refuses to publish if the tag and `package.json` version differ.
 
 ## License
 
