@@ -1,5 +1,11 @@
 # Apple Ads MCP Server
 
+[![npm version](https://img.shields.io/npm/v/@nerdsnipe-inc/apple-ads-mcp-server)](https://www.npmjs.com/package/@nerdsnipe-inc/apple-ads-mcp-server)
+[![npm downloads](https://img.shields.io/npm/dm/@nerdsnipe-inc/apple-ads-mcp-server)](https://www.npmjs.com/package/@nerdsnipe-inc/apple-ads-mcp-server)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org)
+[![MCP](https://img.shields.io/badge/protocol-MCP-purple)](https://modelcontextprotocol.io)
+
 A Model Context Protocol (MCP) server that gives AI assistants (Claude Code, Claude Desktop, Cursor, Windsurf, ...) full access to the **Apple Ads Platform API (v1)**, built on the official [`@apple/apple-ads-platform`](https://www.npmjs.com/package/@apple/apple-ads-platform) SDK.
 
 > This targets the **Apple Ads Platform API** (`https://api.ads.apple.com/v1`), not the older Campaign Management API v5.
@@ -9,6 +15,42 @@ A Model Context Protocol (MCP) server that gives AI assistants (Claude Code, Cla
 - Automatic OAuth (ES256 client secret, token caching, refresh on 401), Retry-After aware retries on 429/5xx
 - Safety switches: read-only mode and tool-group allow/deny lists
 - Starts and lists tools even without credentials (calls then return an actionable error)
+
+## Quick start (no local install)
+
+There is nothing to clone or build. Your AI client launches the server on demand with `npx`, which downloads the published package the first time and caches it. You only need [Node.js 20+](https://nodejs.org) and your Apple Ads API credentials (see [Prerequisites](#prerequisites)).
+
+**Claude Code** (all projects):
+
+```bash
+claude mcp add apple-ads --scope user \
+  -e APPLE_ADS_CLIENT_ID=SEARCHADS.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+  -e APPLE_ADS_TEAM_ID=SEARCHADS.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+  -e APPLE_ADS_KEY_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+  -e APPLE_ADS_PRIVATE_KEY_PATH=~/.appleads/private_keys/private-key.pem \
+  -- npx -y @nerdsnipe-inc/apple-ads-mcp-server
+```
+
+**Any other MCP client** uses the same block in its config file:
+
+```json
+{
+  "mcpServers": {
+    "apple-ads": {
+      "command": "npx",
+      "args": ["-y", "@nerdsnipe-inc/apple-ads-mcp-server"],
+      "env": {
+        "APPLE_ADS_CLIENT_ID": "SEARCHADS.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "APPLE_ADS_TEAM_ID": "SEARCHADS.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "APPLE_ADS_KEY_ID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "APPLE_ADS_PRIVATE_KEY_PATH": "/Users/you/.appleads/private_keys/private-key.pem"
+      }
+    }
+  }
+}
+```
+
+Per-client details are in [Installation](#installation). To verify the package without credentials, run `npx -y @nerdsnipe-inc/apple-ads-mcp-server --list-tools`.
 
 ## Coverage
 
@@ -278,32 +320,38 @@ A Model Context Protocol (MCP) server that gives AI assistants (Claude Code, Cla
 
 ## Installation
 
+All clients launch the same command, `npx -y @nerdsnipe-inc/apple-ads-mcp-server`, with the same environment variables (see [Environment variables](#environment-variables)). Only the config file differs. After editing a config, restart the client.
+
+> **GUI apps and PATH.** Desktop apps (Claude Desktop, Cursor, Windsurf, VS Code) often do not inherit your shell `PATH`. If you see "spawn npx ENOENT", replace `"npx"` with the absolute path from `which npx` (for example `/opt/homebrew/bin/npx`).
+
+> **No key file?** Instead of `APPLE_ADS_PRIVATE_KEY_PATH` you can set `APPLE_ADS_PRIVATE_KEY` to the PEM text itself (newlines written as `\n`). The key then lives only in the client's config. Treat that config file as a secret.
+
 ### Claude Code
 
-```bash
-claude mcp add apple-ads --scope user \
-  -e APPLE_ADS_CLIENT_ID=SEARCHADS.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-  -e APPLE_ADS_TEAM_ID=SEARCHADS.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-  -e APPLE_ADS_KEY_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-  -e APPLE_ADS_PRIVATE_KEY_PATH=~/.appleads/private_keys/private-key.pem \
-  -- npx -y @nerdsnipe-inc/apple-ads-mcp-server
+User scope (every project), as shown in [Quick start](#quick-start-no-local-install). To share the server with a team through a project's `.mcp.json`, use `--scope project` and keep the secrets out of git by referencing environment variables:
+
+```json
+{
+  "mcpServers": {
+    "apple-ads": {
+      "command": "npx",
+      "args": ["-y", "@nerdsnipe-inc/apple-ads-mcp-server"],
+      "env": {
+        "APPLE_ADS_CLIENT_ID": "${APPLE_ADS_CLIENT_ID}",
+        "APPLE_ADS_TEAM_ID": "${APPLE_ADS_TEAM_ID}",
+        "APPLE_ADS_KEY_ID": "${APPLE_ADS_KEY_ID}",
+        "APPLE_ADS_PRIVATE_KEY_PATH": "${APPLE_ADS_PRIVATE_KEY_PATH}"
+      }
+    }
+  }
+}
 ```
 
-From source:
-
-```bash
-git clone https://github.com/NerdSnipe-Inc/apple-ads-mcp-server.git
-cd apple-ads-mcp-server && npm install && npm run build
-claude mcp add apple-ads --scope user -e APPLE_ADS_CLIENT_ID=... -e APPLE_ADS_TEAM_ID=... \
-  -e APPLE_ADS_KEY_ID=... -e APPLE_ADS_PRIVATE_KEY_PATH=... \
-  -- node /absolute/path/to/apple-ads-mcp-server/dist/index.js
-```
-
-Or run `scripts/install-global.sh` for an interactive setup of Claude Code and Claude Desktop (it copies your key to `~/.appleads/private_keys` with mode 600).
+Check it with `claude mcp list`.
 
 ### Claude Desktop
 
-Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (Windows: `%APPDATA%\Claude\claude_desktop_config.json`), then fully quit and reopen the app:
 
 ```json
 {
@@ -322,11 +370,76 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 }
 ```
 
-GUI apps do not inherit your shell PATH: use the absolute path from `which npx` (or `which node` with `/absolute/path/to/dist/index.js` for a source install).
-
 ### Cursor / Windsurf
 
-Add the same `mcpServers` block to `~/.cursor/mcp.json` or `~/.codeium/windsurf/mcp_config.json`.
+Add the same `mcpServers` block as in Claude Desktop to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project) or `~/.codeium/windsurf/mcp_config.json`.
+
+### VS Code (GitHub Copilot)
+
+Create `.vscode/mcp.json` in your workspace. VS Code uses a `servers` key and can prompt for secrets instead of storing them:
+
+```json
+{
+  "inputs": [
+    { "type": "promptString", "id": "ads-client-id", "description": "Apple Ads clientId" },
+    { "type": "promptString", "id": "ads-team-id", "description": "Apple Ads teamId" },
+    { "type": "promptString", "id": "ads-key-id", "description": "Apple Ads keyId" },
+    { "type": "promptString", "id": "ads-key-path", "description": "Path to private-key.pem" }
+  ],
+  "servers": {
+    "apple-ads": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@nerdsnipe-inc/apple-ads-mcp-server"],
+      "env": {
+        "APPLE_ADS_CLIENT_ID": "${input:ads-client-id}",
+        "APPLE_ADS_TEAM_ID": "${input:ads-team-id}",
+        "APPLE_ADS_KEY_ID": "${input:ads-key-id}",
+        "APPLE_ADS_PRIVATE_KEY_PATH": "${input:ads-key-path}"
+      }
+    }
+  }
+}
+```
+
+### Codex CLI
+
+Add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.apple-ads]
+command = "npx"
+args = ["-y", "@nerdsnipe-inc/apple-ads-mcp-server"]
+
+[mcp_servers.apple-ads.env]
+APPLE_ADS_CLIENT_ID = "SEARCHADS.xxxxxxxx-..."
+APPLE_ADS_TEAM_ID = "SEARCHADS.xxxxxxxx-..."
+APPLE_ADS_KEY_ID = "xxxxxxxx-..."
+APPLE_ADS_PRIVATE_KEY_PATH = "/Users/you/.appleads/private_keys/private-key.pem"
+```
+
+### Gemini CLI
+
+Add the standard `mcpServers` block from [Quick start](#quick-start-no-local-install) to `~/.gemini/settings.json`.
+
+### Interactive installer (macOS)
+
+If you cloned this repo, `scripts/install-global.sh` prompts for your credentials, copies the key to `~/.appleads/private_keys` (mode 600), and registers the server in Claude Code (user scope) and Claude Desktop.
+
+### From source
+
+```bash
+git clone https://github.com/NerdSnipe-Inc/apple-ads-mcp-server.git
+cd apple-ads-mcp-server && npm install && npm run build
+```
+
+Then use `"command": "node"` with `"args": ["/absolute/path/to/apple-ads-mcp-server/dist/index.js"]` in any config above, or:
+
+```bash
+claude mcp add apple-ads --scope user -e APPLE_ADS_CLIENT_ID=... -e APPLE_ADS_TEAM_ID=... \
+  -e APPLE_ADS_KEY_ID=... -e APPLE_ADS_PRIVATE_KEY_PATH=... \
+  -- node /absolute/path/to/apple-ads-mcp-server/dist/index.js
+```
 
 ## Environment variables
 
@@ -376,7 +489,8 @@ Group names: `accounts, apps, eligibility, brands, location_groups, campaigns, a
 | 401 after refresh | Wrong clientId/teamId/keyId, or the public key was not uploaded for that key |
 | 403 | The API user lacks a role on that ad account or org |
 | "ad account required" | Pass `adAccountId` or set `APPLE_ADS_AD_ACCOUNT_ID` |
-| Server not found in Claude Desktop | Use absolute paths to `npx`/`node` |
+| `spawn npx ENOENT` or server not found in a desktop app | Use the absolute path from `which npx` (or `which node`) as `command` |
+| Old version keeps running | `npx` caches packages; pin a version (`@nerdsnipe-inc/apple-ads-mcp-server@1.0.1`) or run `npx clear-npx-cache` |
 | Key errors | Must be an EC `prime256v1` private key in PEM format |
 
 Run `npx -y @nerdsnipe-inc/apple-ads-mcp-server --list-tools` to verify installation without credentials.
@@ -390,6 +504,17 @@ npm run typecheck && npm run build && npm test
 ```
 
 `npm run generate:check` fails when generated files are stale (used in CI).
+
+## Releasing
+
+Publishing is automated by [.github/workflows/publish.yml](.github/workflows/publish.yml). Pushing a version tag builds, tests and publishes to npmjs.com (with provenance) and to GitHub Packages.
+
+```bash
+npm version patch            # or minor / major: bumps package.json and creates the vX.Y.Z tag
+git push --follow-tags
+```
+
+One-time setup: add an npm automation token as the repository secret `NPM_TOKEN` (Settings > Secrets and variables > Actions). `GITHUB_TOKEN` is provided automatically. The workflow refuses to publish if the tag and `package.json` version differ.
 
 ## License
 
